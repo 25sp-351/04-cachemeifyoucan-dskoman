@@ -6,6 +6,9 @@
 #include "piece_values.h"
 #include "cut_list.h"
 #include "vec.h"
+#include "memoize.h"
+
+#define CACHE_SIZE 100
 
 void usage(char *program_name);
 
@@ -21,6 +24,10 @@ int main(int argc, char *argv[]) {
         usage(argv[0]);
 
     Vec value_list = read_piece_values();
+
+    // initialize cache
+
+    memoize_cache_pv *cache = memoize_init(CACHE_SIZE, 0);
 
     if (value_list == NULL) {
         fprintf(stderr,"Error in value list.\n");
