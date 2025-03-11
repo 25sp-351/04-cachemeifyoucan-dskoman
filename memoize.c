@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "memoize.h"
-#include "vec.h"
+#include "piece_values.h"
 
 #define NOT_CACHED -1
 
@@ -11,7 +11,6 @@ memoize_cache_pv *memoize_init(int capacity, int dbg_flag) {
   memoize_cache_pv *cache = malloc(sizeof(PieceLengthValue));
   cache->data = malloc(sizeof(PieceLengthValue) * capacity);
 
-  
   for (int i = 0; i < capacity; i++) {
     PieceLengthValue empty_item = {0, 0};
     cache->data[i] = empty_item;
@@ -58,7 +57,7 @@ int memoize_check(memoize_cache_pv *cache, PieceLengthValue *data) {
 }
 
 int memoize_insert(memoize_cache_pv *cache, PieceLengthValue *data) {
-  int cache_check_index = memoize_check(cache, data);
+  int cache_check_index = memoize_check(cache, data->length);
 
   if (cache_check_index == NOT_CACHED) {
     cache->data[memoize_cache_size(cache)] = *data;

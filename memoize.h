@@ -1,7 +1,7 @@
 #ifndef MEMOIZE_H
 #define MEMOIZE_H
 
-#include "piece_values.h"
+#include "cut_list.h"
 
 typedef struct {
   PieceLengthValue *data;
@@ -13,9 +13,9 @@ typedef struct {
 memoize_cache_pv *memoize_init(int capacity, int dbg_flag);
 void memoize_free(memoize_cache_pv *cache);
 
-int memoize_check(memoize_cache_pv *cache, PieceLengthValue data);
+int memoize_check(memoize_cache_pv *cache, PieceLengthValue *data);
 
-int memoize_insert(memoize_cache_pv *cache, PieceLengthValue data);
+int memoize_insert(memoize_cache_pv *cache, PieceLengthValue *data);
 
 int memoize_cache_size(memoize_cache_pv *cache);
 
